@@ -28,6 +28,8 @@ datastore = "1.0.0"
 room = "2.6.1"
 googleGmsGoogleServices = "4.4.2"
 firebaseMessaging = "24.1.1"
+gson = "2.10.1"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +56,8 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
 
 #networking
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref= "retrofit"}
