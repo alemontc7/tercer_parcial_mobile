@@ -19,6 +19,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders += mapOf(
+            "MAPS_API_KEY" to "AIzaSyCe67Z5WtfpFf_t-_xcowWteXo1cz-6IfI"
+        )
+
     }
     buildTypes {
         release {
@@ -49,6 +53,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -67,6 +72,8 @@ dependencies {
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.test)
     kaptAndroidTest(libs.hilt.compiler)
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
 
     //serialization
     implementation(libs.kotlinx.serialization.json)

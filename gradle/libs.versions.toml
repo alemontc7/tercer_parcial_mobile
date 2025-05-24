@@ -29,6 +29,9 @@ room = "2.6.1"
 googleGmsGoogleServices = "4.4.2"
 firebaseMessaging = "24.1.1"
 gson = "2.10.1"
+mapsCompose = "6.6.0"
+playServicesMaps = "18.1.0"
+playServicesLocation = "21.0.1"
 
 
 [libraries]
@@ -57,6 +60,9 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsCompose" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 
 #networking

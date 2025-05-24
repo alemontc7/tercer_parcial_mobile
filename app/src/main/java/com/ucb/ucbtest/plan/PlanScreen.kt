@@ -47,8 +47,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.ucb.domain.Plan
 import com.ucb.ucbtest.R
+import com.ucb.ucbtest.navigation.Screen
 
 private fun openWhatsApp(context: Context, phone: String, message: String) {
     val uri = Uri.parse("whatsapp://send?phone=$phone&text=${Uri.encode(message)}")
@@ -62,7 +64,9 @@ private fun openWhatsApp(context: Context, phone: String, message: String) {
 }
 
 @Composable
-fun PlanScreen(viewModel: PlanViewModel = hiltViewModel()) {
+fun PlanScreen(
+    navController: NavHostController,
+    viewModel: PlanViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
     val plan = state.plans.getOrNull(state.currentIndex)
 
@@ -114,7 +118,8 @@ fun PlanScreen(viewModel: PlanViewModel = hiltViewModel()) {
                     isPrevEnabled = state.currentIndex > 0,
                     isNextEnabled = state.currentIndex < state.plans.lastIndex,
                     onPrevClick = viewModel::previousPlan,
-                    onNextClick = viewModel::nextPlan
+                    onNextClick = viewModel::nextPlan,
+                    navController = navController
                 )
             } ?: Text(
                 text = "Cargando…",
@@ -130,7 +135,8 @@ private fun PlanCard(
     isPrevEnabled: Boolean,
     isNextEnabled: Boolean,
     onPrevClick: () -> Unit,
-    onNextClick: () -> Unit
+    onNextClick: () -> Unit,
+    navController: NavHostController
 ) {
     Card(
         modifier = Modifier
@@ -361,7 +367,7 @@ private fun PlanCard(
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { /* Acción */ },
+                    onClick = { navController.navigate(Screen.MapScreen.route) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
