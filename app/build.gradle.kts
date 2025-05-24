@@ -20,7 +20,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders += mapOf(
-            "MAPS_API_KEY" to "AIzaSyCe67Z5WtfpFf_t-_xcowWteXo1cz-6IfI"
+            "MAPS_API_KEY" to "kkkk"
         )
 
     }
