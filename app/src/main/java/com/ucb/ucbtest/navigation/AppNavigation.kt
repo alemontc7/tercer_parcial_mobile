@@ -9,11 +9,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ucb.domain.Movie
+import com.ucb.domain.Plan
 import com.ucb.ucbtest.counter.CounterUI
 import com.ucb.ucbtest.gitalias.GitaliasUI
 import com.ucb.ucbtest.login.LoginUI
 import com.ucb.ucbtest.movie.MoviesUI
 import com.ucb.ucbtest.moviedetail.MovieDetailUI
+import com.ucb.ucbtest.plan.PlanScreen
 import com.ucb.ucbtest.takephoto.TakePhotoUI
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -26,13 +28,18 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route,
+        startDestination = Screen.PlanScreen.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { ExitTransition.None }
 
     ) {
+
+        composable(Screen.PlanScreen.route) {
+            PlanScreen()
+        }
+
         composable(Screen.MenuScreen.route) {
             LoginUI(
                 onSuccess = {

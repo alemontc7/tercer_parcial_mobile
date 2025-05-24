@@ -6,7 +6,7 @@ import com.ucb.domain.Plan
 class GetPlans (
     val planRepository: PlanRepository
 ){
-    suspend fun invoke(): List<Plan> {
+    suspend operator fun invoke(): List<Plan> {
         return planRepository.getPlans()
     }
 }

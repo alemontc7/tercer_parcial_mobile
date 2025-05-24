@@ -4,11 +4,13 @@ import android.content.Context
 import com.ucb.data.GithubRepository
 import com.ucb.data.LoginRepository
 import com.ucb.data.MovieRepository
+import com.ucb.data.PlanRepository
 import com.ucb.data.PushNotificationRepository
 import com.ucb.data.datastore.ILoginDataStore
 import com.ucb.data.git.IGitRemoteDataSource
 import com.ucb.data.git.ILocalDataSource
 import com.ucb.data.movie.IMovieRemoteDataSource
+import com.ucb.data.plan.IPlanRemoteDataSource
 import com.ucb.data.push.IPushDataSource
 import com.ucb.framework.github.GithubLocalDataSource
 import com.ucb.framework.github.GithubRemoteDataSource
@@ -26,8 +28,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import com.ucb.framework.datastore.LoginDataSource
+import com.ucb.framework.plan.PlanRemoteDataSource
 import com.ucb.framework.push.FirebaseNotificationDataSource
 import com.ucb.usecases.GetEmailKey
+import com.ucb.usecases.GetPlans
 import com.ucb.usecases.ObtainToken
 
 @Module
@@ -131,4 +135,22 @@ object AppModule {
     fun provideIPushDataSource(): IPushDataSource {
         return FirebaseNotificationDataSource()
     }
+
+    @Provides
+    @Singleton
+    fun providePlanRemoteDataSource(
+        @ApplicationContext context: Context
+    ): IPlanRemoteDataSource = PlanRemoteDataSource(context)
+
+    @Provides
+    @Singleton
+    fun providePlanRepository(
+        remoteDataSource: IPlanRemoteDataSource
+    ): PlanRepository = PlanRepository(remoteDataSource)
+
+    @Provides
+    @Singleton
+    fun provideGetPlansUseCase(
+        planRepository: PlanRepository
+    ): GetPlans = GetPlans(planRepository)
 }

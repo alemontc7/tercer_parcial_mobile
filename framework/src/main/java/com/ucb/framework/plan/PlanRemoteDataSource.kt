@@ -7,7 +7,6 @@ import com.ucb.domain.Plan
 import com.ucb.framework.R
 import com.ucb.framework.dto.PlanResponseDto
 import com.ucb.framework.mappers.toDomain
-import javax.inject.Inject
 
 class PlanRemoteDataSource (
     private val context: Context
@@ -16,7 +15,6 @@ class PlanRemoteDataSource (
     override suspend fun fetchPlans(): List<Plan> {
         val inputStream = context.resources.openRawResource(R.raw.plans_stub)
         val json = inputStream.bufferedReader().use { it.readText() }
-
         val response = Gson().fromJson(json, PlanResponseDto::class.java)
         return response.plans.map { it.toDomain() }
     }
