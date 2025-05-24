@@ -1,5 +1,9 @@
 package com.ucb.ucbtest.plan
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -44,6 +49,17 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucb.domain.Plan
 import com.ucb.ucbtest.R
+
+private fun openWhatsApp(context: Context, phone: String, message: String) {
+    val uri = Uri.parse("whatsapp://send?phone=$phone&text=${Uri.encode(message)}")
+    val intent = Intent(Intent.ACTION_VIEW, uri)
+    try {
+        context.startActivity(intent)
+    } catch (e: ActivityNotFoundException) {
+        val webUri = Uri.parse("https://api.whatsapp.com/send?phone=$phone&text=${Uri.encode(message)}")
+        context.startActivity(Intent(Intent.ACTION_VIEW, webUri))
+    }
+}
 
 @Composable
 fun PlanScreen(viewModel: PlanViewModel = hiltViewModel()) {
@@ -360,6 +376,7 @@ private fun PlanCard(
                         )
                     )
                 }
+                val context = LocalContext.current
                 Box(
                     modifier = Modifier
                         .size(48.dp)
@@ -367,7 +384,10 @@ private fun PlanCard(
                         .offset(x = (-16).dp, y = (-24).dp)
                         .clip(CircleShape)
                         .background(Color(0xFF25D366))
-                        .clickable { /* Acción WhatsApp */ },
+                        .clickable {
+                            openWhatsApp(context,"+59179963639", "Hola, quiero este plan ${plan.name}")
+
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
